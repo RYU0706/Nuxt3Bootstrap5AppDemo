@@ -1,5 +1,5 @@
 <template>
   <div class="container">
-    <h1>こんにちは</h1>
+    <h1>こんにちは 世界</h1>
   </div>
 </template>
