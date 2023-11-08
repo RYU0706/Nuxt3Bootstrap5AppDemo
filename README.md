@@ -8,8 +8,7 @@ Nuxt3 Vue3 Bootstrap5を利用したWEBフロントエンド開発
 
 ## 今後解決すべき課題
 
-画面移行、コンテンツ制作
-
+コンテンツ制作
 # Nuxt 3 Minimal Starter
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.

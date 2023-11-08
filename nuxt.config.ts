@@ -4,7 +4,8 @@ export default defineNuxtConfig({
         // baseURL: '/Nuxt3Bootstrap5AppDemo/', // baseURL: '/<repository>/'
         head: {
             meta: [
-                { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+                { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
             ],
             script: [
                 // { src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' }
