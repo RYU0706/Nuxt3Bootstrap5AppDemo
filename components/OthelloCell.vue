@@ -16,17 +16,17 @@
   .cell {
     width: 100%;
     height: 100%;
-    background-color: green; /* または盤面の色に合わせて調整 */
+    background-color: green;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
   .stone {
-    width: 80%; /* セルの幅に対して石のサイズを設定 */
-    height: 80%; /* セルの高さに対して石のサイズを設定 */
-    border-radius: 50%; /* 丸みを持たせる */
-    object-fit: cover; /* 画像のアスペクト比を保ちつつ、コンテナに合わせてトリミング */
+    width: 80%;
+    height: 80%; 
+    border-radius: 50%;
+    object-fit: cover;
   }
   </style>
   

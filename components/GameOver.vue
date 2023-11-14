@@ -5,7 +5,6 @@
       <p v-if="whiteScore > blackScore">白の勝ち！</p>
       <p v-else-if="blackScore > whiteScore">黒の勝ち！</p>
       <p v-else>引き分け！</p>
-      <!-- ここにリプレイやホームに戻るボタンを追加できます -->
     </div>
   </template>
   

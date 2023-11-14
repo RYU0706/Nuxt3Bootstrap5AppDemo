@@ -1,17 +1,14 @@
 <template>
     <div class="game-container">
-        <!-- 現在のプレイヤーを表示 -->
         <div class="current-player">
             Current Player:
             <img v-if="currentPlayer === 'black'" src="../assets/black.png" alt="Black Stone">
             <img v-if="currentPlayer === 'white'" src="../assets/white.png" alt="White Stone">
         </div>
-        <!-- 黒のカウント表示 -->
         <div class="count black-count">
             <img src="../assets/black.png" alt="Black Stone" class="stone-image">
             <span>{{ blackStonesCount }}</span>
         </div>
-        <!-- 白のカウント表示 -->
         <div class="count white-count">
             <span>{{ whiteStonesCount }}</span>
             <img src="../assets/white.png" alt="White Stone" class="stone-image">
@@ -43,8 +40,7 @@ export default {
         OthelloCell,
     },
     data() {
-        const cells = Array(64).fill(null); // 8x8 board
-        // 中央の4マスに初期石を配置
+        const cells = Array(64).fill(null); 
         const middle = 8 / 2;
         cells[middle * 8 + middle - 1] = 'white';
         cells[middle * 8 + middle] = 'black';
@@ -52,8 +48,8 @@ export default {
         cells[(middle - 1) * 8 + middle] = 'white';
         return {
             cells,
-            currentPlayer: 'black', // 最初のプレイヤー
-            isPass: false, // パスが必要かどうかのフラグ
+            currentPlayer: 'black',
+            isPass: false, 
             isGameOver: false,
             whiteScore: 0,
             blackScore: 0,
@@ -67,36 +63,23 @@ export default {
     },
     methods: {
         placeStone(index) {
-            // クリックされたセルが空でなければ何もしない
             if (this.cells[index] !== null) return;
-
-            // 有効な手かどうかをチェックする
             if (!this.isValidMove(index, this.currentPlayer)) return;
-
-            // 石を置く
             this.cells[index] = this.currentPlayer;
-
-            // 石をひっくり返す
             this.flipStones(index);
-
-            // 次のプレイヤーに交代する
             this.switchPlayer();
         },
         switchPlayer() {
-            // プレイヤーを交代する
             this.currentPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
 
-            // ゲームオーバーのチェックを行う
             if (!this.canPlayerMakeMove('white') && !this.canPlayerMakeMove('black')) {
-                // どちらのプレイヤーも手を打てない場合、ゲームを終了する
                 this.isGameOver = true;
                 this.calculateScores();
             } else if (!this.canPlayerMakeMove(this.currentPlayer)) {
-                // 現在のプレイヤーが手を打てない場合、パスを行う
                 this.isPass = true;
                 setTimeout(() => {
                     this.isPass = false;
-                    this.switchPlayer(); // 再度プレイヤーを交代し、ゲームオーバーのチェックを行う
+                    this.switchPlayer(); 
                 }, 2000);
             }
         },
@@ -108,14 +91,14 @@ export default {
             let isValid = false;
 
             const directions = [
-                -1, // 左
-                1, // 右
-                -8, // 上
-                8, // 下
-                -7, // 右上
-                -9, // 左上
-                7, // 右下
-                9, // 左下
+                -1,
+                1, 
+                -8, 
+                8, 
+                -7, 
+                -9, 
+                7, 
+                9, 
             ];
 
             for (let direction of directions) {
@@ -128,13 +111,11 @@ export default {
                         i += direction;
                     } else if (this.cells[i] === player) {
                         if (tilesToFlip.length > 0) {
-                            // 相手の石を挟んでいる場合のみ有効
                             isValid = true;
                             break;
                         }
                         break;
                     } else {
-                        // 空のセルが見つかった場合、その方向は無効
                         break;
                     }
                 }
@@ -145,14 +126,14 @@ export default {
         flipStones(index) {
             const opponent = this.currentPlayer === 'black' ? 'white' : 'black';
             const directions = [
-                -1, // 左
-                1, // 右
-                -8, // 上
-                8, // 下
-                -7, // 右上
-                -9, // 左上
-                7, // 右下
-                9, // 左下
+                -1, 
+                1, 
+                -8, 
+                8, 
+                -7, 
+                -9, 
+                7, 
+                9, 
             ];
 
             directions.forEach((direction) => {
@@ -182,15 +163,12 @@ export default {
         },
 
         isAdjacent(currentIndex, previousIndex, direction) {
-            // 同じ行にあるかどうかをチェック
             if (direction === -1 || direction === 1) {
                 return Math.floor(currentIndex / 8) === Math.floor(previousIndex / 8);
             }
-            // 同じ列にあるかどうかをチェック
             if (direction === -8 || direction === 8) {
-                return true; // 上下移動は常に同じ列になる
+                return true; 
             }
-            // 斜めのチェック
             if (direction === -7 || direction === 9) {
                 return (currentIndex % 8) > (previousIndex % 8);
             }
@@ -230,27 +208,18 @@ export default {
 
 .current-player img {
     width: 50px;
-    /* 画像の幅を50pxに設定 */
     height: 50px;
-    /* 画像の高さを50pxに設定 */
     vertical-align: middle;
-    /* テキストと中央揃えにする */
 }
 
 .board {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    /* 8列 */
     grid-template-rows: repeat(8, 1fr);
-    /* 8行で各行が同じサイズになるように設定 */
     grid-gap: 5px;
-    /* セル間の隙間 */
     width: 80vmin;
-    /* 幅と高さの小さい方の80%に設定 */
     height: 80vmin;
-    /* 幅と高さの小さい方の80%に設定 */
     margin: 0 auto;
-    /* 中央揃え */
 }
 
 .scoreboard {
@@ -262,16 +231,12 @@ export default {
 
 .stones-count img {
     width: 30px;
-    /* 画像の幅を30pxに設定 */
     height: 30px;
-    /* 画像の高さを30pxに設定 */
     vertical-align: middle;
-    /* テキストと中央揃えにする */
 }
 
 .board-container {
     position: relative;
-    /* 必要に応じて他のスタイルを追加 */
 }
 
 .count {
@@ -292,11 +257,8 @@ export default {
 
 .stone-image {
     width: 80px;
-    /* 画像のサイズを適宜調整 */
     height: 80px;
-    /* 画像のサイズを適宜調整 */
     margin-right: 10px;
-    /* 画像とテキストの間隔 */
 }
 
 span {
@@ -313,7 +275,6 @@ span {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    /* 半透明の背景 */
 }
 
 .pass-text {
@@ -327,7 +288,6 @@ span {
 .game-over-text {
     text-align: center;
     color: #fff;
-    /* この色をより明るい色に変更するか、背景色とのコントラストを高める */
 }
 
 .score-display {
@@ -340,7 +300,7 @@ span {
     font-weight: bold;
 }
 
-/* 勝者でない方のテキストのスタイル */
+
 p:not(.winner) {
     color: black;
 }
