@@ -1,22 +1,16 @@
 <template>
-  <div class="container">
-    <h1 class="text-center my-4">Vue.js Othello Game</h1>
-    <OthelloBoard />
+  <div>
+    <h1>オセロゲームへようこそ！</h1>
+    <router-link to="/othello">ゲームを始める</router-link>
   </div>
 </template>
 
 <script>
 export default {
-
-  head() {
-    return {
-      meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
-      ]
-    }
-  }
+  // ここにJavaScriptのロジックを追加できます
 }
 </script>
 
 <style>
+/* ここにスタイルを追加できます */
 </style>
