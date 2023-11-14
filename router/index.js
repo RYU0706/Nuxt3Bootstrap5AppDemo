@@ -16,7 +16,7 @@ export default new Router({
       path: '/game-over',
       name: 'GameOver',
       component: GameOver,
-      props: true // スコアをプロパティとして受け取るようにします
+      props: true 
     }
   ]
 });
