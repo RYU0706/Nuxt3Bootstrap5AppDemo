@@ -5,7 +5,7 @@
   </template>
   
   <script>
-  import OthelloBoard from './components/OthelloBoard.vue'
+  import OthelloBoard from '../components/OthelloBoard.vue'
   
   export default {
     name: 'App',
