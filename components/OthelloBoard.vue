@@ -40,16 +40,19 @@ export default {
         OthelloCell,
     },
     data() {
-        const cells = Array(64).fill(null); 
-        const middle = 8 / 2;
-        cells[middle * 8 + middle - 1] = 'white';
-        cells[middle * 8 + middle] = 'black';
-        cells[(middle - 1) * 8 + middle - 1] = 'black';
-        cells[(middle - 1) * 8 + middle] = 'white';
+        const size = 16;
+        const cells = Array(size * size).fill(null);
+        const middle = size / 2;
+
+        cells[middle * size + middle - 1] = 'white';
+        cells[middle * size + middle] = 'black';
+        cells[(middle - 1) * size + middle - 1] = 'black';
+        cells[(middle - 1) * size + middle] = 'white';
+
         return {
             cells,
             currentPlayer: 'black',
-            isPass: false, 
+            isPass: false,
             isGameOver: false,
             whiteScore: 0,
             blackScore: 0,
@@ -79,7 +82,7 @@ export default {
                 this.isPass = true;
                 setTimeout(() => {
                     this.isPass = false;
-                    this.switchPlayer(); 
+                    this.switchPlayer();
                 }, 2000);
             }
         },
@@ -92,20 +95,20 @@ export default {
 
             const directions = [
                 -1,
-                1, 
-                -8, 
-                8, 
-                -7, 
-                -9, 
-                7, 
-                9, 
+                1,
+                -16,
+                16,
+                -15,
+                -17,
+                15,
+                17,
             ];
 
             for (let direction of directions) {
                 let i = index + direction;
                 let tilesToFlip = [];
 
-                while (i >= 0 && i < 64 && this.isAdjacent(i, i - direction, direction)) {
+                while (i >= 0 && i < 256 && this.isAdjacent(i, i - direction, direction)) {
                     if (this.cells[i] === opponent) {
                         tilesToFlip.push(i);
                         i += direction;
@@ -125,24 +128,14 @@ export default {
         },
         flipStones(index) {
             const opponent = this.currentPlayer === 'black' ? 'white' : 'black';
-            const directions = [
-                -1, 
-                1, 
-                -8, 
-                8, 
-                -7, 
-                -9, 
-                7, 
-                9, 
-            ];
+            const directions = [-1, 1, -16, 16, -15, -17, 15, 17];
 
             directions.forEach((direction) => {
                 let tilesToFlip = [];
-                let i = index;
+                let i = index + direction;
                 let tilesFlippable = false;
 
-                i += direction;
-                while (i >= 0 && i < 64 && this.isAdjacent(i, i - direction, direction)) {
+                while (i >= 0 && i < 256 && this.isAdjacent(i, i - direction, direction)) {
                     if (this.cells[i] === opponent) {
                         tilesToFlip.push(i);
                         i += direction;
@@ -164,19 +157,20 @@ export default {
 
         isAdjacent(currentIndex, previousIndex, direction) {
             if (direction === -1 || direction === 1) {
-                return Math.floor(currentIndex / 8) === Math.floor(previousIndex / 8);
+                return Math.floor(currentIndex / 16) === Math.floor(previousIndex / 16);
             }
-            if (direction === -8 || direction === 8) {
-                return true; 
+            if (direction === -16 || direction === 16) {
+                return true;
             }
-            if (direction === -7 || direction === 9) {
-                return (currentIndex % 8) > (previousIndex % 8);
+            if (direction === -15 || direction === 17) {
+                return (currentIndex % 16) > (previousIndex % 16);
             }
-            if (direction === -9 || direction === 7) {
-                return (currentIndex % 8) < (previousIndex % 8);
+            if (direction === -17 || direction === 15) {
+                return (currentIndex % 16) < (previousIndex % 16);
             }
             return false;
-        },
+        }
+        ,
         checkGameOver() {
         },
         calculateScores() {
@@ -214,8 +208,8 @@ export default {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
     grid-gap: 5px;
     width: 80vmin;
     height: 80vmin;
