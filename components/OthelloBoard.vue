@@ -1,34 +1,38 @@
 <template>
-    <div class="game-container">
-        <div class="current-player">
-            Current Player:
-            <img v-if="currentPlayer === 'black'" src="../assets/black.png" alt="Black Stone">
-            <img v-if="currentPlayer === 'white'" src="../assets/white.png" alt="White Stone">
-        </div>
-        <div class="count black-count">
-            <img src="../assets/black.png" alt="Black Stone" class="stone-image">
-            <span>{{ blackStonesCount }}</span>
-        </div>
-        <div class="count white-count">
-            <span>{{ whiteStonesCount }}</span>
-            <img src="../assets/white.png" alt="White Stone" class="stone-image">
-        </div>
-        <div v-if="isPass" class="overlay">
-            <span class="pass-text">パス</span>
-        </div>
-        <div v-if="isGameOver" class="overlay">
-            <div class="game-over-text">
-                <p>ゲーム終了</p>
-                <p class="score-display">白: {{ whiteScore }} - 黒: {{ blackScore }}</p>
-                <p :class="{ 'winner': isWhiteWinner }">白: <span v-if="isWhiteWinner">WIN</span><span v-else>LOSE</span></p>
-                <p :class="{ 'winner': isBlackWinner }">黒: <span v-if="isBlackWinner">WIN</span><span v-else>LOSE</span></p>
+        <AppHeader />
+
+        <div class="game-container">
+            <div class="current-player">
+                Current Player:
+                <img v-if="currentPlayer === 'black'" src="../assets/black.png" alt="Black Stone">
+                <img v-if="currentPlayer === 'white'" src="../assets/white.png" alt="White Stone">
+            </div>
+            <div class="count black-count">
+                <img src="../assets/black.png" alt="Black Stone" class="stone-image">
+                <span>{{ blackStonesCount }}</span>
+            </div>
+            <div class="count white-count">
+                <span>{{ whiteStonesCount }}</span>
+                <img src="../assets/white.png" alt="White Stone" class="stone-image">
+            </div>
+            <div v-if="isPass" class="overlay">
+                <span class="pass-text">パス</span>
+            </div>
+            <div v-if="isGameOver" class="overlay">
+                <div class="game-over-text">
+                    <p>ゲーム終了</p>
+                    <p class="score-display">白: {{ whiteScore }} - 黒: {{ blackScore }}</p>
+                    <p :class="{ 'winner': isWhiteWinner }">白: <span v-if="isWhiteWinner">WIN</span><span v-else>LOSE</span>
+                    </p>
+                    <p :class="{ 'winner': isBlackWinner }">黒: <span v-if="isBlackWinner">WIN</span><span v-else>LOSE</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="board">
+                <OthelloCell v-for="(cell, index) in cells" :key="index" :cell="cell" @click="placeStone(index)" />
             </div>
         </div>
-
-        <div class="board">
-            <OthelloCell v-for="(cell, index) in cells" :key="index" :cell="cell" @click="placeStone(index)" />
-        </div>
-    </div>
 </template>
   
 <script>
@@ -40,7 +44,7 @@ export default {
         OthelloCell,
     },
     data() {
-        const size = 16;
+        const size = 8;
         const cells = Array(size * size).fill(null);
         const middle = size / 2;
 
@@ -96,12 +100,12 @@ export default {
             const directions = [
                 -1,
                 1,
-                -16,
-                16,
-                -15,
-                -17,
-                15,
-                17,
+                -8,
+                8,
+                -7,
+                -9,
+                7,
+                9,
             ];
 
             for (let direction of directions) {
@@ -128,7 +132,7 @@ export default {
         },
         flipStones(index) {
             const opponent = this.currentPlayer === 'black' ? 'white' : 'black';
-            const directions = [-1, 1, -16, 16, -15, -17, 15, 17];
+            const directions = [-1, 1, -8, 8, -7, -9, 7, 9];
 
             directions.forEach((direction) => {
                 let tilesToFlip = [];
@@ -157,16 +161,16 @@ export default {
 
         isAdjacent(currentIndex, previousIndex, direction) {
             if (direction === -1 || direction === 1) {
-                return Math.floor(currentIndex / 16) === Math.floor(previousIndex / 16);
+                return Math.floor(currentIndex / 8) === Math.floor(previousIndex / 8);
             }
-            if (direction === -16 || direction === 16) {
+            if (direction === -8 || direction === 8) {
                 return true;
             }
-            if (direction === -15 || direction === 17) {
-                return (currentIndex % 16) > (previousIndex % 16);
+            if (direction === -7 || direction === 9) {
+                return (currentIndex % 8) > (previousIndex % 8);
             }
-            if (direction === -17 || direction === 15) {
-                return (currentIndex % 16) < (previousIndex % 16);
+            if (direction === -9 || direction === 7) {
+                return (currentIndex % 8) < (previousIndex % 8);
             }
             return false;
         }
@@ -208,8 +212,8 @@ export default {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
     grid-gap: 5px;
     width: 80vmin;
     height: 80vmin;
@@ -240,12 +244,12 @@ export default {
 }
 
 .black-count {
-    top: 0;
+    top:120px;
     left: 0;
 }
 
 .white-count {
-    top: 0;
+    top: 110px;
     right: 0;
 }
 
@@ -298,5 +302,11 @@ span {
 p:not(.winner) {
     color: black;
 }
+
+.game-container {
+  /* 既存のスタイル */
+  margin-top: 20px; /* 上部のマージンを追加 */
+}
+
 </style>
   
