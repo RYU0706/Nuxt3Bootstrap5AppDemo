@@ -1,7 +1,7 @@
 <template>
   <div class="cell" @click="$emit('click')">
-    <img v-if="cell === 'black'" src="../public/black.png" class="stone">
-    <img v-if="cell === 'white'" src="../public/white.png" class="stone">
+    <img v-if="cell === 'black'" src="black.png" class="stone">
+    <img v-if="cell === 'white'" src="white.png" class="stone">
   </div>
 </template>
 

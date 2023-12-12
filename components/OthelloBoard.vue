@@ -4,16 +4,16 @@
     <div class="game-container">
         <div class="current-player">
             Current Player:
-            <img v-if="currentPlayer === 'black'" src="../public/black.png" alt="Black Stone">
-            <img v-if="currentPlayer === 'white'" src="../public/white.png" alt="White Stone">
+            <img v-if="currentPlayer === 'black'" src="black.png" alt="Black Stone">
+            <img v-if="currentPlayer === 'white'" src="white.png" alt="White Stone">
         </div>
         <div class="count black-count">
-            <img src="../public/black.png" alt="Black Stone" class="stone-image">
+            <img src="black.png" alt="Black Stone" class="stone-image">
             <span>{{ blackStonesCount }}</span>
         </div>
         <div class="count white-count">
             <span>{{ whiteStonesCount }}</span>
-            <img src="../public/white.png" alt="White Stone" class="stone-image">
+            <img src="white.png" alt="White Stone" class="stone-image">
         </div>
         <div v-if="isPass" class="overlay">
             <span class="pass-text">パス</span>
