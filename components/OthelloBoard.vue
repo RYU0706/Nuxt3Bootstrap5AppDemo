@@ -169,7 +169,11 @@ function calculateScores() {
   
 <style scoped>
 .game-container {
+    margin-top: 50px;
     text-align: center;
+    overflow: hidden;
+    max-height: calc(100vh - 50px);
+    max-width: 100vw;
 }
 
 .current-player {
@@ -217,10 +221,12 @@ function calculateScores() {
 }
 
 .black-count {
+    top:0px;
     left: 0;
 }
 
 .white-count {
+    top:0px;
     right: 0;
 }
 

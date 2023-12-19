@@ -13,6 +13,5 @@ header {
   color: white;
   padding: 10px;
   text-align: center;
-  margin-bottom: 20px;
 }
 </style>
