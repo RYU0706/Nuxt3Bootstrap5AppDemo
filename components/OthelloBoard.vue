@@ -1,5 +1,5 @@
 <template>
-    <AppHeader />
+    
 
     <div class="game-container">
         <div class="current-player">
@@ -217,12 +217,10 @@ function calculateScores() {
 }
 
 .black-count {
-    top:120px;
     left: 0;
 }
 
 .white-count {
-    top: 110px;
     right: 0;
 }
 
@@ -276,10 +274,6 @@ p:not(.winner) {
     color: black;
 }
 
-.game-container {
-  /* 既存のスタイル */
-  margin-top: 20px; /* 上部のマージンを追加 */
-}
 
 </style>
   

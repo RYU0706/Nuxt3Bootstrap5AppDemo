@@ -1,6 +1,5 @@
 <template>
   <div>
-    <AppHeader /> <!-- ヘッダーコンポーネントの追加 -->
     <Nuxt /> <!-- ページコンテンツ -->
     <h1>オセロゲームへようこそ！</h1>
     <router-link to="/othello">ゲームを始める</router-link>
