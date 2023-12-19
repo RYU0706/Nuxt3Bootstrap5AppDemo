@@ -87,11 +87,13 @@ function canPlayerMakeMove(player) {
     return cells.value.some((cell, index) => cell === null && isValidMove(index, player));
 }
 
+const directions = [-1, 1, -8, 8, -7, -9, 7, 9];
+
 function isValidMove(index, player) {
     const opponent = player === 'black' ? 'white' : 'black';
     let isValid = false;
 
-    const directions = [-1, 1, -8, 8, -7, -9, 7, 9];
+    
 
     for (let direction of directions) {
         let i = index + direction;
@@ -118,7 +120,6 @@ function isValidMove(index, player) {
 
 function flipStones(index) {
     const opponent = currentPlayer.value === 'black' ? 'white' : 'black';
-    const directions = [-1, 1, -8, 8, -7, -9, 7, 9];
 
     directions.forEach((direction) => {
         let tilesToFlip = [];
