@@ -169,11 +169,21 @@ function calculateScores() {
   
 <style scoped>
 .game-container {
-    margin-top: 50px;
-    text-align: center;
-    overflow: hidden;
-    max-height: calc(100vh - 50px);
-    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-gap: 5px;
+    width: 80vmin;
+    height: 80vmin; 
 }
 
 .current-player {
@@ -185,16 +195,6 @@ function calculateScores() {
     width: 50px;
     height: 50px;
     vertical-align: middle;
-}
-
-.board {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-gap: 5px;
-    width: 80vmin;
-    height: 80vmin;
-    margin: 0 auto;
 }
 
 .scoreboard {
@@ -221,12 +221,12 @@ function calculateScores() {
 }
 
 .black-count {
-    top:0px;
+    top:90px;
     left: 0;
 }
 
 .white-count {
-    top:0px;
+    top:90px;
     right: 0;
 }
 
