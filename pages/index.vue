@@ -1,21 +1,14 @@
 <template>
   <div>
-    <Nuxt /> <!-- ページコンテンツ -->
+    <Nuxt /> 
     <h1>オセロゲームへようこそ！</h1>
     <router-link to="/othello">ゲームを始める</router-link>
   </div>
 </template>
 
 <script>
-import AppHeader from '~/components/AppHeader.vue';
-
-export default {
-  components: {
-    AppHeader
-  }
-};
 </script>
 
 <style>
-/* ここにスタイルを追加できます */
+/* スタイル追加 */
 </style>

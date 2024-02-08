@@ -22,10 +22,8 @@
             <div class="game-over-text">
                 <p>ゲーム終了</p>
                 <p class="score-display">白: {{ whiteScore }} - 黒: {{ blackScore }}</p>
-                <p :class="{ 'winner': isWhiteWinner }">白: <span v-if="isWhiteWinner">WIN</span><span v-else>LOSE</span>
-                </p>
-                <p :class="{ 'winner': isBlackWinner }">黒: <span v-if="isBlackWinner">WIN</span><span v-else>LOSE</span>
-                </p>
+                <p :class="{ 'winner': isWhiteWinner, 'loser': !isWhiteWinner }">白: <span v-if="isWhiteWinner">WIN</span><span v-else>LOSE</span></p>
+                <p :class="{ 'winner': isBlackWinner, 'loser': !isBlackWinner }">黒: <span v-if="isBlackWinner">WIN</span><span v-else>LOSE</span></p>
             </div>
         </div>
 
@@ -261,25 +259,22 @@ span {
     color: #333;
 }
 
-.game-over-text {
+.game-over-text p {
     text-align: center;
-    color: #fff;
+    color: #fff; /* ゲームオーバーテキスト全体を白色に指定 */
 }
 
-.score-display {
-    font-size: 1.5em;
-    margin: 10px 0;
+/* WINのテキスト色を金色に設定 */
+.game-over-text .winner span {
+    color: red;
 }
 
-.winner {
-    color: gold;
-    font-weight: bold;
+/* LOSEのテキスト色を黒色に設定 */
+.game-over-text .loser span {
+    color: blue;
 }
 
 
-p:not(.winner) {
-    color: black;
-}
 
 
 </style>
